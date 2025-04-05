@@ -1,4 +1,4 @@
-BookSpace - A React-Based Book Exploration App
+BookSpace - A React-Based Book App
 
 📖 Overview
 
@@ -6,26 +6,37 @@ BookSpace is a web application built with React that allows users to explore boo
 
 ✨ Features
 
-📌 Forms Handling - Includes login and registration forms with input validation.
+📌 Forms Handling - Includes authentication of user using email and password.
 
 📌 Navigation Bar - Provides seamless routing between Home, Explore, Details, and Library sections.
 
-📌 Search Functionality - Users can search for books dynamically.
+📌 Search Functionality - Users can search for books dynamically and through categories of genres of book.
 
 📌 React Router - Used for smooth page navigation.
 
+📌 FireBase - For Authenication of user
+
+📌 Axios - For ensure fetching of API using https
+
 📌 Tailwind CSS - Styled using Tailwind for a modern UI.
+
+📌 Query Client Provider - Ensure fetching of data
+
 
 🚀 Getting Started
 
 1️⃣ Clone the Repository
 
 git clone https://github.com/yourusername/bookspace.git
-cd bookspace
+cd Bookspace_Capstone
 
 2️⃣ Install Dependencies
 
-npm install
+npm install create vite@latest bookspace_capstone
+npm install react-router
+npm install Tailwindcss@3 postcss
+npm install firebase
+npm install axios
 
 3️⃣ Start the Development Server
 
@@ -38,28 +49,39 @@ Now, open your browser and visit http://localhost:5173/ (if using Vite).
 /bookspace
 │── src/
 │   ├── components/
+    |──pages/
+│   │   ├── Forms
+|   │   │   ├──SignUpForm.jsx 
+|   │   │   ├──SignInForm.jsx 
 │   │   ├── NavBar.jsx
 │   │   ├── SearchBar.jsx
 │   │   ├── Home.jsx
 │   │   ├── Explore.jsx
 │   │   ├── Details.jsx
 │   │   ├── Library.jsx
+│   │   ├──SignUpPage.jsx 
+│   │   ├──SignInForm.jsx 
+│   ├──Config
+|   |   ├──Firebase
 │   ├── App.jsx
 │   ├── main.jsx
 │── public/
+|──services
+   |──SearchService.js
+   |──SignUpService.js
 │── package.json
 │── README.md
 
 🔹 Working with Forms
 
-Forms are implemented for user login and registration. Example from Home.jsx:
+Forms are implemented for user email and password using firebase. Example from Home.jsx:
 
 <form>
-  <label htmlFor="username">Username:</label>
-  <input type="text" id="username" placeholder="Enter username" />
+  <label htmlFor="email">Email:</label>
+  <input type="text" id="email"  />
   
   <label htmlFor="password">Password:</label>
-  <input type="password" id="password" placeholder="Enter password" />
+  <input type="password" id="password" />
   
   <button type="submit">Submit</button>
 </form>
@@ -86,16 +108,33 @@ export default NavBar;
 
 The search functionality filters books dynamically. Example from SearchBar.jsx:
 
-import { useState } from "react";
+import React, {useState} from 'react'
+import searchService from '../../services/searchService';
+function Search() {
+    const [find, setFind] = useState(""); 
+const handleSubmit = async(e) => {
+    e.preventDefault()
+    console.log('searching for...', find);
+    try {
+        const data = await searchService(find);
+        console.log('search results', data)
+    } catch (error) {
+        console.log('Error fetching search results:', error)
+    }
+};
+const handleChange = (e) => {
+    setFind(e.target.value)
+    console.log("Current search term:", e.target.value);
+};
+  return (
+        <form onSubmit={handleSubmit} className='flex  mt-10  justify-center'>
+        <input type="text" id='search' name='search' value={find}  onChange={handleChange} className='px-6 py-4 border border-gray-300 rounded-md w-full ' />
+        <button type='submit'  className='bg-red-500 rounded-xl'>Search</button 
+        </form>
+  )
+}
 
-function SearchBar() {
-  const [query, setQuery] = useState("");
-  const books = ["Harry Potter", "Lord of the Rings", "The Alchemist"];
-
-  const filteredBooks = books.filter((book) =>
-    book.toLowerCase().includes(query.toLowerCase())
-  );
-
+export default Search
   return (
     <div>
       <input type="text" placeholder="Search books..." onChange={(e) => setQuery(e.target.value)} />
@@ -117,6 +156,10 @@ React
 React Router (react-router-dom)
 
 Tailwind CSS
+
+Firebase
+
+Axios
 
 📜 License
 
