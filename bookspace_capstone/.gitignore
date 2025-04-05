@@ -24,5 +24,6 @@ dist-ssr
 *.sw?
 
 # ignore the following flies
-.env
-.firebase.js
+*.env
+*.firebase.js
+*_tests_
