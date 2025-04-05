@@ -1,5 +1,6 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { signUpUserWithEmailAndPassword } from "../../../../services/SignUp.service";
 const validationSchema = Yup.object({
@@ -8,6 +9,7 @@ const validationSchema = Yup.object({
 });
 
 function SignUpForms() {
+  const navigate = useNavigate();
   return (
     <div>
       <Formik
@@ -17,6 +19,7 @@ function SignUpForms() {
           try {
             await signUpUserWithEmailAndPassword(values.email, values.password);
             console.log("Successfully signed up!", values);
+            navigate("/explore");
           } catch (error) {
             console.error("Sign up failed:", error.message);
           }

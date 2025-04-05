@@ -1,11 +1,11 @@
-import React from 'react'
-import SignInForms from './forms/SignInForm'
+import React from "react";
+import SignInForms from "./forms/SignInForm";
 function SignInPage() {
   return (
     <div>
-<SignInForms /> {/*importing of sign In forms*/}
+      <SignInForms /> {/*importing of sign In forms*/}
     </div>
-  )
+  );
 }
 
-export default SignInPage
+export default SignInPage;
