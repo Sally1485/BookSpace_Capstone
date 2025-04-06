@@ -91,7 +91,7 @@ function Explore() {
             className="cursor-pointer"
           >
             <img
-              src={"/public/images/comics.png"}
+              src={"/images/comics.png"}
               alt="comics image"
               className="h-25 w-25 m-5"
             />
@@ -102,7 +102,7 @@ function Explore() {
             className="cursor-pointer"
           >
             <img
-              src={"/public/images/Historical.png"}
+              src={"/images/Historical.png"}
               alt="Historical image"
               className="h-25 w-25 m-5 "
             />
