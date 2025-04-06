@@ -14,9 +14,9 @@ const searchService = async (query) => {
   }
 };
 
-const getBookDetails = async (query) => {
+const getBookDetails = async (workId) => {
   try {
-    const response = await axios.get(`${bookDetailsApi}/${workid}.json`);
+    const response = await axios.get(`${bookDetailsApi}/${workId}.json`);
     console.log("Book Details API Response:", response.data);
     return response.data;
   } catch (error) {

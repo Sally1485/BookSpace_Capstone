@@ -38,8 +38,7 @@ function Search() {
         />
         <button
           type="submit"
-          className='bg-red-500 hover:bg-teal-600 transform hover:-translate-y-1 hover:scale-110 ...">
-  Hover me rounded-xl'
+          className="bg-red-500 hover:bg-teal-600 transform hover:-translate-y-1 hover:scale-110 ..."
         >
           Search
         </button>
@@ -47,7 +46,7 @@ function Search() {
       <div className="mt-6">
         {results.length > 0 && (
           <ul>
-            {Results.map((book) => (
+            {results.map((book) => (
               <li
                 key={book.key}
                 onClick={() => handleBookClick(book.key)}

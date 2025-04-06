@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Search from "../Search";
 import searchService from "../../../services/searchService";
+import { getBookDetails } from "../../../services/searchService";
+import { useParams } from "react-router-dom";
 
 function Explore() {
   const [books, setBooks] = useState([]);
   const [category, setCategory] = useState("");
+  const { id } = useParams();
 
   const handleCategoryClick = async (category) => {
     setCategory(category);
@@ -15,6 +18,19 @@ function Explore() {
       console.log("Error occurred", error);
     }
   };
+  useEffect(() => {
+    if (id) {
+      const fetchBook = async () => {
+        try {
+          const data = await getBookDetails(id);
+          setBooks([data]);
+        } catch (error) {
+          console.error("Error fetching book details:", error);
+        }
+      };
+      fetchBook();
+    }
+  }, [id]);
 
   return (
     <div className="p-8 bg-slate-600 ">
@@ -44,7 +60,7 @@ function Explore() {
               alt="non-fiction image"
               className="h-25 w-25 m-5 "
             />
-            <p className="text-wrap text-cente text-white">Non-fiction</p>
+            <p className="text-wrap text-center text-white">Non-fiction</p>
           </span>
           <span
             onClick={() => handleCategoryClick("Mystery")}
@@ -66,7 +82,7 @@ function Explore() {
             <img
               src={"/images/poetry.png"}
               alt="poetry image"
-              className="h-25 w-25 m-5"
+              className="h-25 w-2s5 m-5"
             />
             <p className="text-wrap text-center text-white">Poetry</p>
           </span>
@@ -75,7 +91,7 @@ function Explore() {
             className="cursor-pointer"
           >
             <img
-              src={"/images/comics.jpg"}
+              src={"/public/images/comics.png"}
               alt="comics image"
               className="h-25 w-25 m-5"
             />
@@ -86,9 +102,9 @@ function Explore() {
             className="cursor-pointer"
           >
             <img
-              src={"/images/Historical.jpg"}
+              src={"/public/images/Historical.png"}
               alt="Historical image"
-              className="h-25 w-25m-5 "
+              className="h-25 w-25 m-5 "
             />
             <p className="text-wrap text-center text-white">Historical</p>
           </span>

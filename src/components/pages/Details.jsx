@@ -42,7 +42,7 @@ function Details() {
       </h1>
       {book ? (
         <>
-          <div class=" flex-col max-auto text-justify space-y-11 text-xl">
+          <div className=" flex-col max-auto text-justify space-y-11 text-xl">
             <h2>{book?.title}</h2>
             <p>{book?.description}</p>
             <p>Publication:{book?.publication} </p>

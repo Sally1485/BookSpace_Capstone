@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { signUpUserWithEmailAndPassword } from "../../../../services/SignUp.service";
+
 const validationSchema = Yup.object({
   email: Yup.string().email("invalid email").required("email is required"),
   password: Yup.string().required("password is required"),
@@ -40,7 +41,11 @@ function SignUpForms() {
                     id="email"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   />
-                  <ErrorMessage name="email" component="p" />
+                  <ErrorMessage
+                    name="email"
+                    component="p"
+                    className="text-black text-sm mt-1"
+                  />
                 </div>
                 <div className="mb-4">
                   <label htmlFor="password">Password:</label>
@@ -50,7 +55,11 @@ function SignUpForms() {
                     id="password"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   />
-                  <ErrorMessage name="password" component="p" />
+                  <ErrorMessage
+                    name="password"
+                    component="p"
+                    className="text-black text-sm mt-1"
+                  />
                 </div>
                 <div className="flex mt-3 justify-center bg-red-700 hover:bg-red-500 rounded-2xl sm:rounded-lg md:rounded-xl">
                   <button type="submit">Submit</button>
